@@ -12,7 +12,13 @@ The code produces:
 - **Band structure** along high-symmetry paths (VCA)
 - **Spectral function** $A(\mathbf{k}, E)$ showing disorder-broadened bands (CPA)
 - **Density of states** comparison (VCA vs CPA)
-- **Self-energy diagnostics** $\Sigma(E)$ for inspecting convergence and scattering rates
+- **Orbital-resolved (partial) DOS** decomposed by s, p, s* character
+- **Quasiparticle scattering rates** $\tau^{-1}(E)$ per orbital from $\mathrm{Im}\,\Sigma$
+- **Effective band structure** with disorder-renormalised band positions and FWHM widths
+- **Band gap vs composition** with bowing-parameter fit
+- **Optical conductivity** $\sigma_1(\omega)$ and dielectric function $\varepsilon_2(\omega)$ (Kubo-Greenwood)
+- **DC resistivity** vs composition
+- **Thermoelectric coefficients**: Seebeck $S$, electronic thermal conductivity $\kappa_e$ vs temperature
 
 ![VCA bands, DOS and CPA spectral function for Si₀.₅Ge₀.₅](docs/SiGe_x0.50_vca_cpa.png)
 
@@ -36,6 +42,14 @@ Higher-resolution run:
 python scripts/run_all.py --out outputs --nk 10 --ne 800 --eta 0.04 --cpa_tol 1e-7 --cpa_max_iter 300
 ```
 
+Compute all CPA observables (partial DOS, scattering rates, effective bands, optical conductivity, thermoelectrics, etc.):
+
+```bash
+python scripts/plot_observables.py --observable all --x 0.5 --nk 4 --ne 400 --out outputs_obs
+```
+
+Individual observables can be selected: `--observable pdos scattering bands gap optical dc thermo`.
+
 Outputs are PNG figures written to the chosen output directory.
 
 ## What’s inside
@@ -45,7 +59,9 @@ Outputs are PNG figures written to the chosen output directory.
 - `src/hamiltonian/slater_koster.py`: SK hopping matrices for sp³s*.
 - `src/hamiltonian/bloch.py`: Bloch Hamiltonian H(k) and hopping-only H_hop(k).
 - `src/cpa/solver.py`: single-site CPA solver (energy-by-energy).
-- `src/cpa/greens.py`: DOS and spectral map routines.
+- `src/cpa/greens.py`: DOS, spectral function, partial DOS, scattering rates, effective bands.
+- `src/cpa/transport.py`: Kubo-Greenwood optical/DC conductivity, thermoelectric coefficients.
+- `src/cpa/observables.py`: band-gap extraction and bowing-parameter fitting.
 - `src/utils/backend.py`: NumPy / PyTorch array backend abstraction.
 - `src/utils/kpath.py`: high-symmetry k-path via [seekpath](https://github.com/giovannipizzi/seekpath) (HPKOT convention).
 
@@ -78,3 +94,9 @@ If you need sp³d⁵s* or second neighbors, the CPA machinery stays the same, bu
 6. R. J. Elliott, J. A. Krumhansl, and P. L. Leath, "The theory and properties of randomly disordered crystals and related physical systems," *Rev. Mod. Phys.* **46**, 465–543 (1974). — Comprehensive review of disorder methods including CPA; useful for broader context.
 
 7. D. W. Taylor, "Vibrational properties of imperfect crystals with large defect concentrations," *Phys. Rev.* **156**, 1017–1029 (1967). — Independent early derivation of the CPA self-consistency condition.
+
+### Transport (Kubo-Greenwood)
+
+8. R. Kubo, "Statistical-mechanical theory of irreversible processes. I," *J. Phys. Soc. Jpn.* **12**, 570–586 (1957). — Linear-response formalism for conductivity.
+
+9. D. A. Greenwood, "The Boltzmann equation in the theory of electrical conduction in metals," *Proc. Phys. Soc.* **71**, 585–596 (1958). — Quantum-mechanical conductivity formula used in the transport module.

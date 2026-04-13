@@ -18,4 +18,5 @@ from .lattice import (
 from .slater_koster import hopping_sp3s_star
 from .bloch import (
     p_soc_matrix, bloch_hamiltonian_sp3s_star, hopping_only_matrix,
+    velocity_matrix_sp3s_star,
 )

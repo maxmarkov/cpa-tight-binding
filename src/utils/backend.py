@@ -274,3 +274,10 @@ def diag(v: Any) -> Any:
     else:
         v = t.tensor(v, dtype=t.float64, device=_DEVICE)
     return t.diag(v)
+
+
+def diagonal(x, axis1=0, axis2=1):
+    """Extract diagonal from (batched) matrix. For shape (N, M, M) returns (N, M)."""
+    if _BACKEND == "numpy":
+        return np.diagonal(x, axis1=axis1, axis2=axis2)
+    return _torch().diagonal(x, dim1=axis1, dim2=axis2)

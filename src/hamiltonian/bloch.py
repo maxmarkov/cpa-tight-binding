@@ -105,3 +105,52 @@ def hopping_only_matrix(k_frac, params: TBParams, include_soc: bool=False):
         Hcell0[5:10,5:10] = H0
         H = H - backend.kron(backend.eye(2, dtype=complex), Hcell0)
     return H
+
+def velocity_matrix_sp3s_star(k_frac, params: TBParams, alpha: int,
+                              include_soc: bool = False):
+    """
+    Velocity operator v_alpha(k) = (1/hbar) dH/dk_alpha for Cartesian direction alpha.
+
+    Since H_AB(k) = sum_d T_d exp(i k.d), the derivative is:
+        dH_AB/dk_alpha = sum_d (i * d_alpha) * T_d * exp(i k.d)
+
+    On-site blocks are k-independent, so their derivative is zero.
+
+    Parameters
+    ----------
+    k_frac : array (3,)
+        Fractional k-point.
+    params : TBParams
+    alpha : int
+        Cartesian direction (0=x, 1=y, 2=z).
+    include_soc : bool
+        If True and params.delta_so > 0, return 20x20 spinful matrix.
+
+    Returns
+    -------
+    V : array (norb_cell, norb_cell)
+        Velocity matrix in units of eV*Angstrom (hbar=1).
+    """
+    a = params.a
+    bvec = reciprocal_vectors(a)
+    kf = backend.asarray(k_frac)
+    nd = kf.ndim if hasattr(kf, "ndim") else kf.dim()
+    if nd == 1:
+        kf = kf.reshape(1, -1)
+    k_cart = frac_to_cart_k(kf, bvec)[0]
+
+    nn = diamond_nn_vectors(a)
+    dHAB = backend.zeros((5, 5), dtype=complex)
+    for d in nn:
+        phase = backend.exp(backend.asarray(1j * float(backend.dot(k_cart, d)), dtype=complex))
+        T = hopping_sp3s_star(params, d)
+        dHAB = dHAB + (1j * float(d[alpha])) * phase * T
+
+    V = backend.zeros((10, 10), dtype=complex)
+    V[0:5, 5:10] = dHAB
+    V[5:10, 0:5] = backend.H(dHAB)
+
+    if include_soc and params.delta_so > 0:
+        V = backend.kron(backend.eye(2, dtype=complex), V)
+
+    return V
