@@ -1,14 +1,18 @@
 
-# Virtual Crystal Approximation (VCA) and Coherent Potential Approximation for alloys
+# Coherent Potential Approximation for alloys
 
-This package implements:
+The package allows to compute alloy properties based on virtual crystal (VCA) and coherent potential approximations (CPA).
+The former performs a linear composition mixing (with optional bond-length scaling factor). The latter is computed within
+single-site approximation for diagonal (on-site) substitutional disorder. 
 
-- A nearest-neighbor **orthogonal sp³s\*** tight-binding Hamiltonian for the **diamond** structure (Si, Ge).
-- **VCA (Virtual Crystal Approximation)**: linear composition mixing (with optional bond-length scaling).
-- **Single-site CPA (Coherent Potential Approximation)** for **diagonal (on-site) substitutional disorder**.
-- Plots: **band structure** (VCA), **CPA spectral intensity** A(k,E), **DOS** (VCA vs CPA), and a simple self-energy diagnostic.
+To illustrate the approach, we using the nearest-neighbor **orthogonal sp³s\*** tight-binding Hamiltonian for the **diamond** structure (Si, Ge).
 
-It is meant as a *simple, readable reference implementation*.
+Outputs:
+
+- **band structure** (VCA)
+- **CPA spectral intensity** A(k,E)
+- **Density Of States (DOS)** (VCA vs CPA)
+- a simple self-energy diagnostic.
 
 ## Quick start
 
