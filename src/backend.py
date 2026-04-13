@@ -1,6 +1,6 @@
 """
 Unified array backend: NumPy (default) or PyTorch (when --gpu).
-Set via set_backend(use_gpu) before any tb_cpa code that creates arrays.
+Set via set_backend(use_gpu) before any src code that creates arrays.
 """
 from __future__ import annotations
 import math

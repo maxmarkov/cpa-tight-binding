@@ -38,13 +38,13 @@ Outputs are PNG figures written to the chosen output directory.
 
 ## What’s inside
 
-- `tb_cpa/params.py`: Si/Ge sp³s* parameters (Vogl-style) and VCA mixing.
-- `tb_cpa/lattice.py`: diamond/FCC geometry + Monkhorst–Pack grids.
-- `tb_cpa/slater_koster.py`: SK hopping matrices for sp³s*.
-- `tb_cpa/hamiltonian.py`: Bloch Hamiltonian H(k) and hopping-only H_hop(k).
-- `tb_cpa/cpa.py`: single-site CPA solver (energy-by-energy).
-- `tb_cpa/greens.py`: DOS and spectral map routines.
-- `tb_cpa/kpath.py`: Γ–X–W–K–Γ–L k-path.
+- `src/hamiltonian/params.py`: Si/Ge sp³s* parameters (Vogl-style) and VCA mixing.
+- `src/hamiltonian/lattice.py`: diamond/FCC geometry + Monkhorst–Pack grids.
+- `src/hamiltonian/slater_koster.py`: SK hopping matrices for sp³s*.
+- `src/hamiltonian/bloch.py`: Bloch Hamiltonian H(k) and hopping-only H_hop(k).
+- `src/cpa.py`: single-site CPA solver (energy-by-energy).
+- `src/greens.py`: DOS and spectral map routines.
+- `src/kpath.py`: high-symmetry k-path via [seekpath](https://github.com/giovannipizzi/seekpath) (HPKOT convention).
 
 See `docs/approach.md` for the algorithm summary.
 

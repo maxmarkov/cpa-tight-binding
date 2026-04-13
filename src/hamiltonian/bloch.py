@@ -11,7 +11,7 @@ doubling and adding an on-site L·S term on the p-manifold.
 """
 from __future__ import annotations
 
-from . import backend
+from .. import backend
 from .params import TBParams, onsite_matrix
 from .lattice import diamond_nn_vectors, reciprocal_vectors, frac_to_cart_k
 from .slater_koster import hopping_sp3s_star

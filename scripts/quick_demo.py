@@ -13,19 +13,21 @@ import argparse
 import sys
 from pathlib import Path
 
-# Allow importing tb_cpa when run as script from project root
+# Allow importing src when run as script from project root
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import matplotlib.pyplot as plt
 
-from tb_cpa.backend import set_backend, to_numpy
-from tb_cpa import backend as be
-from tb_cpa.params import SI_VOGL, GE_VOGL, mix_params_vca, disorder_onsites, onsite_matrix
-from tb_cpa.lattice import reciprocal_vectors, frac_to_cart_k, monkhorst_pack
-from tb_cpa.kpath import make_kpath, kpath_distances
-from tb_cpa.hamiltonian import bloch_hamiltonian_sp3s_star, hopping_only_matrix
-from tb_cpa.cpa import cpa_solve_grid, embed_onsite_in_cell
-from tb_cpa.greens import dos_from_eigs, dos_from_gloc, spectral_map_kpath
+from src.backend import set_backend, to_numpy
+from src import backend as be
+from src.hamiltonian import (
+    SI_VOGL, GE_VOGL, mix_params_vca, disorder_onsites, onsite_matrix,
+    reciprocal_vectors, frac_to_cart_k, monkhorst_pack,
+    bloch_hamiltonian_sp3s_star, hopping_only_matrix,
+)
+from src.kpath import make_kpath
+from src.cpa import cpa_solve_grid, embed_onsite_in_cell
+from src.greens import dos_from_eigs, dos_from_gloc, spectral_map_kpath
 
 def compute_vca_bands(k_frac_path, params, include_soc: bool=False):
     bands = be.stack([be.real(be.eigvalsh(bloch_hamiltonian_sp3s_star(kf, params, include_soc=include_soc))) for kf in k_frac_path])
@@ -49,16 +51,16 @@ def main():
     outdir = Path(args.out)
     outdir.mkdir(parents=True, exist_ok=True)
 
-    # k path
-    k_frac_path, labels = make_kpath(n_per_segment=60)
-
     for x in args.x:
         params = mix_params_vca(x, SI_VOGL, GE_VOGL, include_soc=False)
+
+        # k path (lattice-constant-aware via seekpath)
+        k_frac_path, labels, s = make_kpath(a=params.a, n_per_segment=60)
+        k_frac_path = be.asarray(k_frac_path)
+        s = be.asarray(s)
+
         # VCA bands
         bands = compute_vca_bands(k_frac_path, params, include_soc=False)
-        bvec = reciprocal_vectors(params.a)
-        k_cart_path = frac_to_cart_k(k_frac_path, bvec)
-        s = kpath_distances(k_cart_path)
 
         # energy window
         emin = float(be.amin(bands) - 1.0)

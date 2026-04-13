@@ -5,7 +5,7 @@ and k-point generation.
 """
 from __future__ import annotations
 
-from . import backend
+from .. import backend
 
 def fcc_primitive_vectors(a: float):
     """

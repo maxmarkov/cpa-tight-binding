@@ -1,9 +1,10 @@
 
 import numpy as np
-from tb_cpa.params import SI_VOGL, GE_VOGL, mix_params_vca, disorder_onsites
-from tb_cpa.lattice import monkhorst_pack
-from tb_cpa.hamiltonian import bloch_hamiltonian_sp3s_star, hopping_only_matrix
-from tb_cpa.cpa import cpa_solve_energy
+from src.hamiltonian import (
+    SI_VOGL, GE_VOGL, mix_params_vca, disorder_onsites,
+    monkhorst_pack, bloch_hamiltonian_sp3s_star, hopping_only_matrix,
+)
+from src.cpa import cpa_solve_energy
 
 def test_hermiticity():
     params = mix_params_vca(0.3, SI_VOGL, GE_VOGL)

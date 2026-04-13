@@ -87,7 +87,7 @@ $$
 
 and use linear mixing $\Sigma \leftarrow (1-\alpha)\Sigma + \alpha\Sigma_{\mathrm{new}}$.
 
-This is implemented in `tb_cpa/cpa.py`.
+This is implemented in `src/cpa.py`. The Hamiltonian construction lives in `src/hamiltonian/`.
 
 ## Observables
 

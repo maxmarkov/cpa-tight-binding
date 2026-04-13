@@ -8,7 +8,7 @@ for a bond direction with direction cosines (l,m,n).
 """
 from __future__ import annotations
 
-from . import backend
+from .. import backend
 from .params import TBParams
 
 def hopping_sp3s_star(params: TBParams, direction) -> object:
