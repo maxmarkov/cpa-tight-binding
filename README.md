@@ -14,6 +14,8 @@ The code produces:
 - **Density of states** comparison (VCA vs CPA)
 - **Self-energy diagnostics** $\Sigma(E)$ for inspecting convergence and scattering rates
 
+![VCA bands, DOS and CPA spectral function for Si₀.₅Ge₀.₅](docs/SiGe_x0.50_vca_cpa.png)
+
 ## Quick start
 
 ```bash
