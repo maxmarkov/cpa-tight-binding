@@ -36,10 +36,17 @@ def spectral_function_k(E: float, eta: float, Hk, Sigma_cell) -> float:
     return -(1.0 / _PI) * float(backend.imag(backend.trace(Gk)))
 
 def spectral_function_k_matrix(E: float, eta: float, Hk, Sigma_cell):
-    """Full spectral matrix A(k,E) = -(1/pi) Im G(k,E).  Returns (norb, norb)."""
+    """
+    Full spectral matrix A(k,E) = -(1/pi) Im G(k,E).
+
+    Uses the anti-Hermitian part  Im G = (G - G^dag) / (2i)  so that
+    A is guaranteed Hermitian (and positive semi-definite for causal Sigma).
+    """
     z = backend.asarray(complex(E, eta), dtype=complex)
     Gk = backend.inv(z * backend.eye(Hk.shape[0], dtype=complex) - Hk - Sigma_cell)
-    return -(1.0 / _PI) * backend.imag(Gk)
+    # anti-Hermitian part: (G - G^dag) / (2i)
+    ImG = (Gk - backend.H(Gk)) / backend.asarray(2j, dtype=complex)
+    return -(1.0 / _PI) * backend.real(ImG)
 
 
 def spectral_map_kpath(energies, eta: float, Hhop_path,

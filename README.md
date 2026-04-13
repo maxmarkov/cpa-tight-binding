@@ -22,6 +22,12 @@ The code produces:
 
 ![VCA bands, DOS and CPA spectral function for Si₀.₅Ge₀.₅](docs/SiGe_x0.50_vca_cpa.png)
 
+![Optical conductivity and dielectric function for Si₀.₅Ge₀.₅](docs/optical_x0.50.png)
+
+![DC resistivity vs Ge fraction](docs/dc_rho_vs_x.png)
+
+![Thermoelectric coefficients for Si₀.₅Ge₀.₅](docs/thermo_x0.50.png)
+
 ## Quick start
 
 ```bash
