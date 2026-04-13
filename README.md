@@ -1,18 +1,18 @@
 
-# Coherent Potential Approximation for alloys
+# Coherent Potential Approximation for Si/Ge alloys
 
-The package allows to compute alloy properties based on virtual crystal (VCA) and coherent potential approximations (CPA).
-The former performs a linear composition mixing (with optional bond-length scaling factor). The latter is computed within
-single-site approximation for diagonal (on-site) substitutional disorder. 
+A tight-binding toolkit for computing electronic properties of Si₁₋ₓGeₓ alloys using the **Virtual Crystal Approximation (VCA)** and **Coherent Potential Approximation (CPA)**.
 
-To illustrate the approach, we using the nearest-neighbor **orthogonal sp³s\*** tight-binding Hamiltonian for the **diamond** structure (Si, Ge).
+VCA constructs an effective periodic crystal by linearly interpolating on-site energies and hopping parameters between the pure endpoints, with optional bond-length scaling. CPA goes further by treating substitutional disorder explicitly: it embeds a single impurity site in a self-consistently determined effective medium so that the average scattering vanishes, capturing alloy-induced band broadening and lifetime effects that VCA misses.
 
-Outputs:
+The underlying Hamiltonian is a nearest-neighbor **orthogonal sp³s*** model for the **diamond** lattice (Si, Ge), parameterised in the Vogl/Hjalmarson/Dow style.
 
-- **band structure** (VCA)
-- **CPA spectral intensity** A(k,E)
-- **Density Of States (DOS)** (VCA vs CPA)
-- a simple self-energy diagnostic.
+The code produces:
+
+- **Band structure** along high-symmetry paths (VCA)
+- **Spectral function** $A(\mathbf{k}, E)$ showing disorder-broadened bands (CPA)
+- **Density of states** comparison (VCA vs CPA)
+- **Self-energy diagnostics** $\Sigma(E)$ for inspecting convergence and scattering rates
 
 ## Quick start
 
@@ -38,9 +38,9 @@ Outputs are PNG figures written to the chosen output directory.
 
 ## What’s inside
 
-- `tb_cpa/params.py`: Si/Ge sp³s\* parameters (Vogl-style) and VCA mixing.
+- `tb_cpa/params.py`: Si/Ge sp³s* parameters (Vogl-style) and VCA mixing.
 - `tb_cpa/lattice.py`: diamond/FCC geometry + Monkhorst–Pack grids.
-- `tb_cpa/slater_koster.py`: SK hopping matrices for sp³s\*.
+- `tb_cpa/slater_koster.py`: SK hopping matrices for sp³s*.
 - `tb_cpa/hamiltonian.py`: Bloch Hamiltonian H(k) and hopping-only H_hop(k).
 - `tb_cpa/cpa.py`: single-site CPA solver (energy-by-energy).
 - `tb_cpa/greens.py`: DOS and spectral map routines.
@@ -51,7 +51,7 @@ See `docs/approach.md` for the algorithm summary.
 ## Notes / limitations
 
 - Disorder model is **on-site only** (no off-diagonal/bond disorder).
-- Parameter set is **nearest neighbor sp³s\*** (fast enough for CPA, but not “state of the art”).
+- Parameter set is **nearest neighbor sp³s*** (fast enough for CPA, but not “state of the art”).
 - SOC hooks exist but are not enabled by default in the demo scripts.
 
-If you need sp³d⁵s\* or second neighbors, the CPA machinery stays the same, but matrices get bigger.VV
+If you need sp³d⁵s* or second neighbors, the CPA machinery stays the same, but matrices get bigger.
