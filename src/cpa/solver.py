@@ -14,7 +14,7 @@ This module implements a practical fixed-point iteration at each energy.
 """
 from __future__ import annotations
 
-from . import backend
+from ..utils import backend
 
 def embed_onsite_in_cell(V_atom, n_atoms: int = 2):
     """Embed a per-atom onsite matrix into the 2-atom cell (spinless 10x10)."""

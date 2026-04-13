@@ -1,2 +1,2 @@
-__all__ = ['hamiltonian', 'greens', 'cpa', 'kpath', 'backend']
+__all__ = ['hamiltonian', 'cpa', 'utils']
 __version__ = '0.2.0'

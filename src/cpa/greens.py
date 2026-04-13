@@ -4,7 +4,7 @@ Green's function utilities: DOS and spectral function for VCA and CPA.
 """
 from __future__ import annotations
 
-from . import backend
+from ..utils import backend
 
 def dos_from_eigs(eigs, energies, eta: float):
     """

@@ -12,16 +12,18 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import matplotlib.pyplot as plt
 
-from src.backend import set_backend, to_numpy
-from src import backend as be
+from src.utils.backend import set_backend, to_numpy
+from src.utils import backend as be
 from src.hamiltonian import (
     SI_VOGL, GE_VOGL, mix_params_vca, disorder_onsites, onsite_matrix,
     reciprocal_vectors, frac_to_cart_k, monkhorst_pack,
     bloch_hamiltonian_sp3s_star, hopping_only_matrix,
 )
-from src.kpath import make_kpath
-from src.cpa import cpa_solve_grid, embed_onsite_in_cell
-from src.greens import dos_from_eigs, dos_from_gloc, spectral_map_kpath
+from src.utils.kpath import make_kpath
+from src.cpa import (
+    cpa_solve_grid, embed_onsite_in_cell,
+    dos_from_eigs, dos_from_gloc, spectral_map_kpath,
+)
 
 def main():
     ap = argparse.ArgumentParser()

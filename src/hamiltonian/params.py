@@ -16,7 +16,7 @@ For production-quality ETB, consider larger bases (sp3d5s*) and/or second neighb
 from __future__ import annotations
 from dataclasses import dataclass
 
-from .. import backend
+from ..utils import backend
 
 @dataclass(frozen=True)
 class TBParams:

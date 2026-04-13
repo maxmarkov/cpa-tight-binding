@@ -42,9 +42,10 @@ Outputs are PNG figures written to the chosen output directory.
 - `src/hamiltonian/lattice.py`: diamond/FCC geometry + Monkhorst–Pack grids.
 - `src/hamiltonian/slater_koster.py`: SK hopping matrices for sp³s*.
 - `src/hamiltonian/bloch.py`: Bloch Hamiltonian H(k) and hopping-only H_hop(k).
-- `src/cpa.py`: single-site CPA solver (energy-by-energy).
-- `src/greens.py`: DOS and spectral map routines.
-- `src/kpath.py`: high-symmetry k-path via [seekpath](https://github.com/giovannipizzi/seekpath) (HPKOT convention).
+- `src/cpa/solver.py`: single-site CPA solver (energy-by-energy).
+- `src/cpa/greens.py`: DOS and spectral map routines.
+- `src/utils/backend.py`: NumPy / PyTorch array backend abstraction.
+- `src/utils/kpath.py`: high-symmetry k-path via [seekpath](https://github.com/giovannipizzi/seekpath) (HPKOT convention).
 
 See `docs/approach.md` for the algorithm summary.
 
