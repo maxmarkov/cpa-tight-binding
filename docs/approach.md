@@ -21,7 +21,7 @@ Nearest-neighbor (tetrahedral) hopping uses Slater–Koster two-center integrals
 
 On-site energies are $E_s, E_p, E_{s^*}$.
 
-Defaults are a classic sp³s* parameterization often attributed to the Vogl/Hjalmarson/Dow style (1980s).
+Defaults are a classic sp³s* parameterization from Vogl, Hjalmarson, and Dow [1]. Hopping matrices are built using the Slater–Koster two-center formalism [2], and bond-length scaling follows the Harrison rule [3].
 
 ## VCA (Virtual Crystal Approximation)
 
@@ -48,7 +48,7 @@ H(\mathbf{k}) = H_{\mathrm{hop}}(\mathbf{k}) + V_{\mathrm{site}}
 $$
 
 CPA replaces the random alloy by an **effective medium** with a complex coherent potential (self-energy)
-$\Sigma(E)$ such that the *average single-site scattering vanishes*.
+$\Sigma(E)$ such that the *average single-site scattering vanishes* [4,5]. For a broader review of the method and its context, see Elliott, Krumhansl, and Leath [6].
 
 ### Practical self-consistency used here
 
@@ -128,7 +128,17 @@ Typical knobs:
 ## Limitations and extensions
 
 - The disorder model is **on-site only** (no bond disorder).
-- Nearest-neighbor sp³s* is minimal; more quantitative work often uses sp³d⁵s\* and/or second neighbors.
+- Nearest-neighbor sp³s* is minimal; more quantitative work often uses sp³d⁵s* and/or second neighbors.
 - Single-site CPA ignores short-range order and localization; cluster CPA can address some effects.
 
 Still, the code is a solid template: replace the TB basis/parameters and keep the CPA machinery.
+
+## References
+
+[1] P. Vogl, H. P. Hjalmarson, and J. D. Dow, *J. Phys. Chem. Solids* **44**, 365–378 (1983).
+[2] J. C. Slater and G. F. Koster, *Phys. Rev.* **94**, 1498–1524 (1954).
+[3] W. A. Harrison, *Electronic Structure and the Properties of Solids* (Freeman, 1980).
+[4] P. Soven, *Phys. Rev.* **156**, 809–813 (1967).
+[5] B. Velický, S. Kirkpatrick, and H. Ehrenreich, *Phys. Rev.* **175**, 747–766 (1968).
+[6] R. J. Elliott, J. A. Krumhansl, and P. L. Leath, *Rev. Mod. Phys.* **46**, 465–543 (1974).
+[7] D. W. Taylor, *Phys. Rev.* **156**, 1017–1029 (1967).

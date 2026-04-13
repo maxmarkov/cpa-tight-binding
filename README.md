@@ -55,3 +55,23 @@ See `docs/approach.md` for the algorithm summary.
 - SOC hooks exist but are not enabled by default in the demo scripts.
 
 If you need sp³d⁵s* or second neighbors, the CPA machinery stays the same, but matrices get bigger.
+
+## References
+
+### Tight-binding Hamiltonian
+
+1. P. Vogl, H. P. Hjalmarson, and J. D. Dow, "A semi-empirical tight-binding theory of the electronic structure of semiconductors," *J. Phys. Chem. Solids* **44**, 365–378 (1983). — Original sp³s* parameterisation for diamond/zincblende semiconductors used in this code.
+
+2. J. C. Slater and G. F. Koster, "Simplified LCAO method for the periodic potential problem," *Phys. Rev.* **94**, 1498–1524 (1954). — Two-center integral formalism underlying the hopping-matrix construction.
+
+3. W. A. Harrison, *Electronic Structure and the Properties of Solids* (Freeman, San Francisco, 1980). — Bond-length scaling rules ($d^{-n}$) used for the VCA interpolation of hopping parameters.
+
+### Coherent Potential Approximation
+
+4. P. Soven, "Coherent-potential model of substitutional disordered alloys," *Phys. Rev.* **156**, 809–813 (1967). — Foundational single-site CPA formulation for substitutional alloys.
+
+5. B. Velický, S. Kirkpatrick, and H. Ehrenreich, "Single-site approximations in the electronic theory of simple binary alloys," *Phys. Rev.* **175**, 747–766 (1968). — Systematic development of single-site CPA and its relation to the average T-matrix approximation.
+
+6. R. J. Elliott, J. A. Krumhansl, and P. L. Leath, "The theory and properties of randomly disordered crystals and related physical systems," *Rev. Mod. Phys.* **46**, 465–543 (1974). — Comprehensive review of disorder methods including CPA; useful for broader context.
+
+7. D. W. Taylor, "Vibrational properties of imperfect crystals with large defect concentrations," *Phys. Rev.* **156**, 1017–1029 (1967). — Independent early derivation of the CPA self-consistency condition.
